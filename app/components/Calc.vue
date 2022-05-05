@@ -110,7 +110,15 @@ export default {
     },
 
     doCalc() {
-      if (this.displayField.indexOf("^") !== -1) {
+      if (
+        ["^", "/", "*", "-", "+", "."].includes(this.displayField.slice(-1))
+      ) {
+        alert({
+          title: "Ошибка!",
+          message: "Уравнение не завершено",
+          okButtonText: "Ок",
+        });
+      } else if (this.displayField.indexOf("^") !== -1) {
         this.displayField
           .match(/\d+(\.\d+)?\^(\-|\+)?\d+(\.\d+)?/gi)
           .map((row) => {
@@ -125,15 +133,15 @@ export default {
             alert({
               title: "Ошибка!",
               message: "Делить на 0 нельзя",
-              okButtonText: "Больше так не буду",
+              okButtonText: "Ок",
             });
           } else {
             this.displayField = "";
             alert({
               title: "!!! ОШИБКА !!!",
               message:
-                "Вы сделали что-то не так, либо получившееся число СЛИШКОМ большое",
-              okButtonText: "Ну ладно",
+                "Вы сделали что-то не так, либо получившееся число очень большое",
+              okButtonText: "Ок",
             });
           }
         } else {
@@ -152,7 +160,7 @@ export default {
             alert({
               title: "Ошибка",
               message: "Что-то не так",
-              okButtonText: "Ну ладно",
+              okButtonText: "Ок",
             });
           }
         } else {
